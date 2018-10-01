@@ -1,0 +1,4 @@
+---
+- name: "Artifact stored localy"
+  set_fact:
+    solr_hybris_patch: "{{ transport_local }}"

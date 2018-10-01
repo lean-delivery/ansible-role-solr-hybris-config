@@ -1,0 +1,16 @@
+---
+- name: "Download artifact from s3"
+  aws_s3:
+    bucket: "{{ transport_s3_bucket }}"
+    object: "{{ transport_s3_path }}"
+    dest: "{{ download_path }}/{{ solr_hybris_patch_name }}"
+    aws_access_key: "{{ transport_s3_aws_access_key }}"
+    aws_secret_key: "{{ transport_s3_aws_secret_key }}"
+    mode: get
+  retries: 5
+  delegate_to: "localhost"
+  connection: "local"
+
+- name: "Downloaded artifact"
+  set_fact:
+    solr_hybris_patch: "{{ download_path }}/{{ solr_hybris_patch_name }}"

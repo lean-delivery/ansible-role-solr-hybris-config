@@ -1,0 +1,35 @@
+---
+- name: "Install boto module"
+  pip:
+    name: "{{ item }}"
+    state: present
+    extra_args: --upgrade
+  with_items:
+    - "boto"
+    - "boto3"
+    - "botocore"
+  delegate_to: "localhost"
+  connection: "local"
+  become: True
+  when: transport == "s3"
+
+- name: "Load a variables"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
+
+- name: "Fetch solr patch with {{ transport }} transport"
+  include_tasks: "{{ transport_driver }}"
+  with_first_found:
+    - "fetch/{{ transport }}.yml"
+    - "fetch/unknown-transport.yml"
+  loop_control:
+    loop_var: transport_driver
+
+- name: "Choose platform based task"
+  include_tasks: "{{ platform }}"
+  with_first_found:
+    - "system/{{ ansible_os_family }}.yml"
+    - "system/not-supported.yml"
+  loop_control:
+    loop_var: platform

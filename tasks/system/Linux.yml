@@ -1,0 +1,15 @@
+---
+- name: "Install hybris components"
+  unarchive:
+    src: "{{ solr_hybris_patch }}"
+    dest: "{{ dest_solr_path }}"
+    owner: "{{ solr_user }}"
+    group: "{{ solr_group }}"
+    mode: 0755
+    creates: "{{ dest_solr_path }}/contrib/hybris"
+  become: True
+  notify:
+    - "restart solr linux"
+
+- name: "Force all notified handlers"
+  meta: flush_handlers

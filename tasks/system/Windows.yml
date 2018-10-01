@@ -1,0 +1,17 @@
+---
+- name: "Upload hybris components"
+  win_copy:
+    src: "{{ solr_hybris_patch }}"
+    dest: "{{ dest_main_path }}\\"
+    force: True
+
+# extract hybris dir ( hybris/lib/hybriscomponents.jar ) in the contrib directory
+- name: "Install hybris components"
+  win_unzip:
+    src: "{{ dest_main_path }}\\{{ solr_hybris_patch_name }}"
+    dest: "{{ dest_solr_path }}"
+    creates: "{{ dest_solr_path }}\\contrib\\hybris"
+  notify: "restart solr windows"
+
+- name: "Force all notified handlers"
+  meta: flush_handlers
