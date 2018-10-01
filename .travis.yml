@@ -6,9 +6,6 @@ language: python
 python:
   - "2.7"
 
-services:
-  - docker
-
 before_install:
   - git clone -b ${lint_version} https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
 
@@ -18,7 +15,6 @@ install:
 
 script:
   - ansible-lint -c .ansible-lint `find . -regex ".*\.\(yml\)"`
-  - molecule test -s default
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
