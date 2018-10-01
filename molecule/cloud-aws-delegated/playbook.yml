@@ -4,7 +4,7 @@
   roles:
     - role: lean_delivery.java
     - role: lean_delivery.solr_standalone
-    - role: solr-hybris-config
+    - role: ansible-role-solr-hybris-config
       transport: "web"
       transport_web: "{{ lookup('env','STORAGE_AWS') }}/hybris-solr/solr-HYBRISCOMM6600P_0-70003031.zip"
   vars:
