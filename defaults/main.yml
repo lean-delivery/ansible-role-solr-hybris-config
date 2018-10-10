@@ -2,8 +2,8 @@
 ## Global application env settings
 
 solr_version: 7.1.0
-solr_hybris_contrib_patch_name: solr-contrib-HYBRISCOMM6600P_0-70003031.zip
-solr_hybris_data_patch_name: solr-data-HYBRISCOMM6600P_0-70003031.zip
+solr_contrib_hybris_patch_name: solr-contrib-HYBRISCOMM6600P_0-70003031.zip
+solr_data_hybris_patch_name: solr-data-HYBRISCOMM6600P_0-70003031.zip
 
 # artifact source transport
 transport: "local"
