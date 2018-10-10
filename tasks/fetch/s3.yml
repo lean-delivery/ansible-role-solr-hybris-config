@@ -25,5 +25,5 @@
 
 - name: "Downloaded artifact"
   set_fact:
-    solr_data_hybris_patch: "{{ download_path }}/{{ solr_hybris_patch_name }}"
+    solr_data_hybris_patch: "{{ download_path }}/{{ solr_data_hybris_patch_name }}"
     solr_contrib_hybris_patch: "{{ download_path }}/{{ solr_contrib_hybris_patch_name }}"
