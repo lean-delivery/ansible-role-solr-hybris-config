@@ -1,12 +1,24 @@
 ---
-- name: "Install hybris components"
+- name: "Install contrib hybris components"
   unarchive:
-    src: "{{ solr_hybris_patch }}"
+    src: "{{ solr_contrib_hybris_patch }}"
     dest: "{{ dest_solr_path }}"
     owner: "{{ solr_user }}"
     group: "{{ solr_group }}"
     mode: 0755
     creates: "{{ dest_solr_path }}/contrib/hybris"
+  become: True
+  notify:
+    - "restart solr linux"
+
+- name: "Install data hybris components"
+  unarchive:
+    src: "{{ solr_data_hybris_patch }}"
+    dest: "{{ solr_home }}"
+    owner: "{{ solr_user }}"
+    group: "{{ solr_group }}"
+    mode: 0755
+    creates: "{{ solr_home }}/default"
   become: True
   notify:
     - "restart solr linux"

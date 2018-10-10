@@ -2,10 +2,15 @@
 artifactory=/opt/installs
 package=HYBRISCOMM180800P_0-70003534
 zip_extension=ZIP
-zip_file=solr-$package
+contrib_zip_file=solr-contrib-$package
+data_zip_file=solr-data-$package
 
 script_path=$(dirname ${0} 2>/dev/null)
 cd ${script_path}
+echo ${script_path}
+if [[ "$script_path" == "." ]]; then
+  script_path=`pwd`
+fi
 hybris_bin=hybris/bin
 
 if [[ $artifactory == "http*" ]]; then
@@ -37,9 +42,12 @@ cd ./solr
 if [ -d ./bin ]; then
   rm -rf ./bin
 fi
-zip -qr $zip_file.zip .
+zip -qr $contrib_zip_file.zip ./contrib
+mv *.zip ${script_path}
+cd ./server/solr
+zip -qr $data_zip_file.zip .
+mv *.zip ${script_path}
 
-mv *.zip ..
 cd $script_path
 
 rm -rf ./solr
