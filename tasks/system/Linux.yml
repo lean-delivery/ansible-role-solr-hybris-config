@@ -18,7 +18,7 @@
     owner: "{{ solr_user }}"
     group: "{{ solr_group }}"
     mode: 0755
-    creates: "{{ solr_home }}/default"
+    creates: "{{ solr_home }}/configsets/default"
   become: True
   notify:
     - "restart solr linux"
