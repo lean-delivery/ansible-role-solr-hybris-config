@@ -2,7 +2,8 @@
 ## Global application env settings
 
 solr_version: 7.1.0
-solr_hybris_patch_name: solr-HYBRISCOMM6600P_0-70003031.zip
+solr_contrib_hybris_patch_name: solr-contrib-HYBRISCOMM6600P_0-70003031.zip
+solr_data_hybris_patch_name: solr-data-HYBRISCOMM6600P_0-70003031.zip
 
 # artifact source transport
 transport: "local"
@@ -11,10 +12,10 @@ transport: "local"
 # - "local" Local patch
 # - "s3" fetch patch from s3 bucket
 
-transport_web: "http://my-storage.example.com/{{ solr_hybris_patch_name }}"
-transport_local: "/tmp/{{ solr_hybris_patch_name }}"
+transport_web: "http://my-storage.example.com"
+transport_local: "/tmp"
 transport_s3_bucket: "s3_bucket"
-transport_s3_path: "/folder/{{ solr_hybris_patch_name }}"
+transport_s3_path: "/folder"
 
 # path to download patch
 download_path: "/tmp"
@@ -25,3 +26,4 @@ solr_with_systemd: True
 solr_user: "solr"
 solr_group: "solr"
 solr_base_path: /var/solr
+solr_home: "{{ solr_base_path }}/data"

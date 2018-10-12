@@ -31,8 +31,10 @@ Requirements
 ## Role Variables
   - `solr_version` - matches available version on https://archive.apache.org/dist/lucene/solr/. Tested versions 5.3-7.1.x
     default: `7.1.0`
-  - `solr_hybris_patch_name` - Hybris patch name (stored in files and prepared by sh scripts in files dir)
-    default: `solr-HYBRISCOMM6600P_0-70003031.zip`
+  - `solr_contrib_hybris_patch_name` - Hybris patch name (stored in files and prepared by sh scripts in files dir)
+    default: `solr-contrib-HYBRISCOMM6600P_0-70003031.zip`
+  - `solr_data_hybris_patch_name` - Hybris patch name (stored in files and prepared by sh scripts in files dir)
+    default: `solr-data-HYBRISCOMM6600P_0-70003031.zip`
   - `transport` - solr patch source transport
     default: `local`
     Available:
@@ -40,13 +42,13 @@ Requirements
      - `local` - local patch
      - `s3` - fetch patch from s3 bucket
   - `transport_web` - URI for http/https patch
-    default: `http://my-storage.example.com/{{ solr_hybris_patch_name }}`
-  - `transport_local` - path for local patch
-    default: `/tmp/{{ solr_hybris_patch_name }}`
+    default: `http://my-storage.example.com`
+  - `transport_local` - path for local patch directory
+    default: `/tmp`
   - `transport_s3_bucket` - s3 bucket name
     default: `s3_bucket`
-  - `transport_s3_path` - path to patch in bucket
-    default: `/folder/{{ solr_hybris_patch_name }}`
+  - `transport_s3_path` - path to patch folder in bucket
+    default: `/folder`
   - `transport_s3_aws_access_key` - aws key. Need to set in role or set as parameter or set env variables according https://docs.ansible.com/ansible/latest/modules/aws_s3_module.html
     default: `undefined`
   - `transport_s3_aws_secret_key` - aws secret key. Need to set in role or set as parameter or set env variables according https://docs.ansible.com/ansible/latest/modules/aws_s3_module.html
@@ -67,6 +69,8 @@ Requirements
     default: `solr`
   - `solr_base_path` - path to solr base
     default: `/var/solr`
+  - `solr_home` - path to SOLR_HOME
+    default: `{{ solr_base_path }}/data`
   - `solr_with_systemd` - to run solr as a service
     default: `True`
 
