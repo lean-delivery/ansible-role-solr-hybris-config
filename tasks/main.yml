@@ -5,11 +5,13 @@
     state: present
     extra_args: --upgrade
   with_items:
+    - "pip"
+    - "botocore"
     - "boto"
     - "boto3"
-    - "botocore"
   delegate_to: "localhost"
   connection: "local"
+  run_once: True
   become: True
   when: transport == "s3"
 
