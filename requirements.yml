@@ -1,5 +1,3 @@
 ---
 - src: lean_delivery.solr_standalone
-  version: 1.0
 - src: lean_delivery.java
-  version: 1.4
