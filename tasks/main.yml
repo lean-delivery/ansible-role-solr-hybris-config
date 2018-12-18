@@ -1,17 +1,18 @@
 ---
 - name: "Install boto module"
   pip:
-    name: "{{ item }}"
+    name:
+      - "pip"
+      - "botocore"
+      - "boto"
+      - "boto3"
     state: present
     extra_args: --upgrade
-  with_items:
-    - "pip"
-    - "botocore"
-    - "boto"
-    - "boto3"
   delegate_to: "localhost"
   connection: "local"
   run_once: True
+  register: installed_packages
+  until: installed_packages is success
   become: True
   when: transport == "s3"
 
