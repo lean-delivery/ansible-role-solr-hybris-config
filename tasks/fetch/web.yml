@@ -6,6 +6,7 @@
   until: "'OK' in contrib_file_downloaded.msg"
   retries: 3
   delay: 2
+  force: True
   register: contrib_file_downloaded
   delegate_to: "localhost"
   connection: "local"
@@ -17,6 +18,7 @@
   until: "'OK' in data_file_downloaded.msg"
   retries: 3
   delay: 2
+  force: True
   register: data_file_downloaded
   delegate_to: "localhost"
   connection: "local"
