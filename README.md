@@ -2,7 +2,7 @@ Solr Configuration for SAP Hybris
 =========
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-solr-hybris-config/master/LICENSE)
 [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-solr-hybris-config.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-solr-hybris-config)
-[![Galaxy](https://img.shields.io/badge/galaxy-lean_delivery.solr-hybris-config-blue.svg)](https://galaxy.ansible.com/lean_delivery.solr-hybris-config)
+[![Galaxy](https://img.shields.io/badge/galaxy-lean_delivery.solr__hybris__config-blue.svg)](https://galaxy.ansible.com/lean_delivery/solr_hybris_config)
 ![Ansible](https://img.shields.io/ansible/role/d/30253.svg)
 ![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F30253%2F&query=$.min_ansible_version)
 ## Summary
