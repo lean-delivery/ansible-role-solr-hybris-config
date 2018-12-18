@@ -3,7 +3,7 @@
   get_url:
     url: "{{ transport_web }}/{{ solr_contrib_hybris_patch_name }}"
     dest: "{{ download_path }}/{{ solr_contrib_hybris_patch_name }}"
-  until: "'OK' in contrib_file_downloaded.msg" or "'file already exists' in contrib_file_downloaded.msg"
+  until: 'OK' in contrib_file_downloaded.msg or 'file already exists' in contrib_file_downloaded.msg
   retries: 3
   delay: 2
   register: contrib_file_downloaded
@@ -14,7 +14,7 @@
   get_url:
     url: "{{ transport_web }}/{{ solr_data_hybris_patch_name }}"
     dest: "{{ download_path }}/{{ solr_data_hybris_patch_name }}"
-  until: "'OK' in data_file_downloaded.msg" or "'file already exists' in contrib_file_downloaded.msg"
+  until: 'OK' in data_file_downloaded.msg or 'file already exists' in contrib_file_downloaded.msg
   retries: 3
   delay: 2
   register: data_file_downloaded
