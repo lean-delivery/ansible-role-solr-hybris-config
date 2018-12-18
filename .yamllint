@@ -30,4 +30,4 @@ rules:
   new-lines: disable
 
 ignore: |
-molecule
+  molecule
