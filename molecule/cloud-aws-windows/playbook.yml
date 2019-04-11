@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: solr_standalone
+  hosts: all
   roles:
     - role: lean_delivery.java
       transport: web
