@@ -2,7 +2,8 @@ Solr Configuration for SAP Hybris
 =========
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-solr-hybris-config/master/LICENSE)
 [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-solr-hybris-config.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-solr-hybris-config)
-[![Galaxy](https://img.shields.io/badge/galaxy-lean__delivery.solr__hybris__config-blue.svg)](https://galaxy.ansible.com/lean_delivery/solr_hybris_config)
+[![Build Status](https://gitlab.com/lean-delivery/ansible-role-solr-hybris-config/badges/master/build.svg)](https://gitlab.com/lean-delivery/ansible-role-solr-hybris-config)
+[![Galaxy](https://img.shields.io/badge/galaxy-lean__delivery.solr-hybris-config-blue.svg)](https://galaxy.ansible.com/lean_delivery/solr-hybris-config)
 ![Ansible](https://img.shields.io/ansible/role/d/30253.svg)
 ![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F30253%2F&query=$.min_ansible_version)
 ## Summary
@@ -58,12 +59,12 @@ Requirements
     default: `undefined`
   - `download_path` - local folder for downloading patch
     default: `/tmp`
-  - `overrride_dest_main_path` - root directory to store solr folder
+  - `solr_dest_main_path` - root directory to store solr folder
     default: `/opt`
     default: `C:\Solr`
-  - `overrride_dest_solr_path` - solr folder path
+  - `solr_dest_path` - solr folder path
     default: `{{ dest_main_path }}/solr-{{ solr_version }}`
-    default: `{{ dest_main_path }}\\solr-{{ solr_version }}`
+    default: `{{ dest_main_path }}\solr-{{ solr_version }}`
   - `solr_user` - os user to run solr service
     default: `solr`
   - `solr_group` - os group for user

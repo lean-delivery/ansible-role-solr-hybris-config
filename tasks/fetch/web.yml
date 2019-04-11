@@ -1,27 +1,23 @@
 ---
-- name: "Download contrib artifact from web"
+- name: Download contrib artifact from web
   get_url:
-    url: "{{ transport_web }}/{{ solr_contrib_hybris_patch_name }}"
-    dest: "{{ download_path }}/{{ solr_contrib_hybris_patch_name }}"
-  until: "'OK' in contrib_file_downloaded.msg or 'file already exists' in contrib_file_downloaded.msg"
+    url: '{{ transport_web }}/{{ solr_contrib_hybris_patch_name }}'
+    dest: '{{ download_path }}/{{ solr_contrib_hybris_patch_name }}'
+  until: '"OK" in contrib_file_downloaded.msg or "file already exists" in contrib_file_downloaded.msg'
   retries: 3
   delay: 2
   register: contrib_file_downloaded
-  delegate_to: "localhost"
-  connection: "local"
 
-- name: "Download data artifact from web"
+- name: Download data artifact from web
   get_url:
-    url: "{{ transport_web }}/{{ solr_data_hybris_patch_name }}"
-    dest: "{{ download_path }}/{{ solr_data_hybris_patch_name }}"
-  until: "'OK' in data_file_downloaded.msg or 'file already exists' in contrib_file_downloaded.msg"
+    url: '{{ transport_web }}/{{ solr_data_hybris_patch_name }}'
+    dest: '{{ download_path }}/{{ solr_data_hybris_patch_name }}'
+  until: '"OK" in contrib_file_downloaded.msg or "file already exists" in contrib_file_downloaded.msg'
   retries: 3
   delay: 2
   register: data_file_downloaded
-  delegate_to: "localhost"
-  connection: "local"
 
-- name: "Downloaded artifact"
+- name: Downloaded artifact
   set_fact:
-    solr_contrib_hybris_patch: "{{ contrib_file_downloaded.dest }}"
-    solr_data_hybris_patch: "{{ data_file_downloaded.dest }}"
+    solr_contrib_hybris_patch: '{{ contrib_file_downloaded.dest }}'
+    solr_data_hybris_patch: '{{ data_file_downloaded.dest }}'

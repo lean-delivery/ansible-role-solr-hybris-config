@@ -1,19 +1,18 @@
 ---
-- name: Windows instances waiting.
-  gather_facts: True
-  hosts: windows
-  tasks:
-    - name: Wait for system to become reachable
-      wait_for_connection:
-        delay: 240
-
 - name: Converge
   hosts: solr_standalone
   roles:
     - role: lean_delivery.java
+      transport: web
+      transport_web: "{{ lookup('env','STORAGE_AWS') }}/oracle-java/jdk-8u202-windows-x64.exe"
+      java_major_version: 8
+      java_minor_version: 202
+      java_package: jdk
+      java_tarball_install: False
     - role: lean_delivery.solr_standalone
     - role: ansible-role-solr-hybris-config
       transport: "web"
       transport_web: "{{ lookup('env','STORAGE_EPC') }}/hybris-solr"
   vars:
     solr_change_default_password: False
+    solr_copy_default_configsets: True

@@ -1,29 +1,25 @@
 ---
-- name: "Download contrib artifact from s3"
+- name: Download contrib artifact from s3
   aws_s3:
-    bucket: "{{ transport_s3_bucket }}"
-    object: "{{ transport_s3_path }}/{{ solr_contrib_hybris_patch_name }}"
-    dest: "{{ download_path }}/{{ solr_contrib_hybris_patch_name }}"
-    aws_access_key: "{{ transport_s3_aws_access_key }}"
-    aws_secret_key: "{{ transport_s3_aws_secret_key }}"
+    bucket: '{{ transport_s3_bucket }}'
+    object: '{{ transport_s3_path }}/{{ solr_contrib_hybris_patch_name }}'
+    dest: '{{ download_path }}/{{ solr_contrib_hybris_patch_name }}'
+    aws_access_key: '{{ transport_s3_aws_access_key }}'
+    aws_secret_key: '{{ transport_s3_aws_secret_key }}'
     mode: get
   retries: 5
-  delegate_to: "localhost"
-  connection: "local"
 
-- name: "Download data artifact from s3"
+- name: Download data artifact from s3
   aws_s3:
-    bucket: "{{ transport_s3_bucket }}"
-    object: "{{ transport_s3_path }}/{{ solr_data_hybris_patch_name }}"
-    dest: "{{ download_path }}/{{ solr_data_hybris_patch_name }}"
-    aws_access_key: "{{ transport_s3_aws_access_key }}"
-    aws_secret_key: "{{ transport_s3_aws_secret_key }}"
+    bucket: '{{ transport_s3_bucket }}'
+    object: '{{ transport_s3_path }}/{{ solr_data_hybris_patch_name }}'
+    dest: '{{ download_path }}/{{ solr_data_hybris_patch_name }}'
+    aws_access_key: '{{ transport_s3_aws_access_key }}'
+    aws_secret_key: '{{ transport_s3_aws_secret_key }}'
     mode: get
   retries: 5
-  delegate_to: "localhost"
-  connection: "local"
 
-- name: "Downloaded artifact"
+- name: Downloaded artifact
   set_fact:
-    solr_data_hybris_patch: "{{ download_path }}/{{ solr_data_hybris_patch_name }}"
-    solr_contrib_hybris_patch: "{{ download_path }}/{{ solr_contrib_hybris_patch_name }}"
+    solr_data_hybris_patch: '{{ download_path }}/{{ solr_data_hybris_patch_name }}'
+    solr_contrib_hybris_patch: '{{ download_path }}/{{ solr_contrib_hybris_patch_name }}'

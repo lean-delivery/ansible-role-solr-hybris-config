@@ -1,27 +1,29 @@
 ---
-- name: "Install contrib hybris components"
+- name: Install contrib hybris components
   unarchive:
-    src: "{{ solr_contrib_hybris_patch }}"
-    dest: "{{ dest_solr_path }}"
-    owner: "{{ solr_user }}"
-    group: "{{ solr_group }}"
+    src: '{{ solr_contrib_hybris_patch }}'
+    dest: '{{ solr_dest_path }}'
+    owner: '{{ solr_user }}'
+    group: '{{ solr_group }}'
     mode: 0755
-    creates: "{{ dest_solr_path }}/contrib/hybris"
+    creates: '{{ solr_dest_path }}/contrib/hybris'
+    remote_src: True
   become: True
   notify:
-    - "restart solr linux"
+    - restart solr linux
 
-- name: "Install data hybris components"
+- name: Install data hybris components
   unarchive:
-    src: "{{ solr_data_hybris_patch }}"
-    dest: "{{ solr_home }}"
-    owner: "{{ solr_user }}"
-    group: "{{ solr_group }}"
+    src: '{{ solr_data_hybris_patch }}'
+    dest: '{{ solr_home }}'
+    owner: '{{ solr_user }}'
+    group: '{{ solr_group }}'
     mode: 0755
-    creates: "{{ solr_home }}/configsets/default"
+    creates: '{{ solr_home }}/configsets/default'
+    remote_src: True
   become: True
   notify:
-    - "restart solr linux"
+    - restart solr linux
 
-- name: "Force all notified handlers"
+- name: Force all notified handlers
   meta: flush_handlers

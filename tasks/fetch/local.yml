@@ -1,5 +1,5 @@
 ---
-- name: "Artifact stored localy"
+- name: Artifact stored localy
   set_fact:
-    solr_contrib_hybris_patch: "{{ transport_local }}/{{ solr_contrib_hybris_patch_name }}"
-    solr_data_hybris_patch: "{{ transport_local }}/{{ solr_data_hybris_patch_name }}"
+    solr_contrib_hybris_patch: '{{ transport_local }}/{{ solr_contrib_hybris_patch_name }}'
+    solr_data_hybris_patch: '{{ transport_local }}/{{ solr_data_hybris_patch_name }}'

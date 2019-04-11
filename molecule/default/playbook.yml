@@ -9,3 +9,4 @@
       transport_web: "{{ lookup('env','STORAGE_EPC') }}/hybris-solr"
   vars:
     solr_change_default_password: False
+    solr_copy_default_configsets: True
