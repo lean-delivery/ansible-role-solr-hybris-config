@@ -17,7 +17,9 @@
 - name: Load a variables
   include_vars: '{{ item }}'
   with_first_found:
+    - '{{ ansible_system }}.yml'
     - '{{ ansible_os_family }}.yml'
+    - 'system/not-supported.yml'
 
 - name: 'Fetch solr patch with {{ transport }} transport'
   include_tasks: '{{ transport_driver }}'

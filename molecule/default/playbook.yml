@@ -5,8 +5,8 @@
     - role: lean_delivery.java
     - role: lean_delivery.solr_standalone
     - role: ansible-role-solr-hybris-config
-      transport: "web"
-      transport_web: "{{ lookup('env','STORAGE_AWS') }}/hybris-solr"
+      transport: web
+      transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'
   vars:
     solr_change_default_password: False
     solr_auth_configure: False
