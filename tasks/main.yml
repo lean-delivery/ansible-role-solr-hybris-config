@@ -8,7 +8,6 @@
       - boto3
     state: present
     extra_args: --upgrade
-  run_once: True
   register: install_packages
   until: install_packages is success
   become: True

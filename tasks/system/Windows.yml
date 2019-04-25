@@ -2,27 +2,27 @@
 - name: Upload contrib hybris components
   win_copy:
     src: '{{ solr_contrib_hybris_patch }}'
-    dest: '{{ solr_dest_main_path }}\'
+    dest: '{{ solr_dest_main_path }}/'
     force: True
 
 - name: Upload data hybris components
   win_copy:
     src: '{{ solr_data_hybris_patch }}'
-    dest: '{{ solr_dest_main_path }}\'
+    dest: '{{ solr_dest_main_path }}/'
     force: True
 
 - name: Install contrib hybris components
   win_unzip:
-    src: '{{ solr_dest_main_path }}\{{ solr_contrib_hybris_patch }}'
+    src: '{{ solr_dest_main_path }}/{{ solr_contrib_hybris_patch }}'
     dest: '{{ solr_dest_path }}'
-    creates: '{{ solr_dest_path }\contrib\hybris'
+    creates: '{{ solr_dest_path }/contrib/hybris'
   notify: restart solr windows
 
 - name: Install data hybris components
   win_unzip:
-    src: '{{ solr_dest_main_path }}\{{ solr_data_hybris_patch }}'
-    dest: '{{ solr_dest_path }}\server\'
-    creates: '{{ solr_dest_path }}\contrib\hybris\solr'
+    src: '{{ solr_dest_main_path }}/{{ solr_data_hybris_patch }}'
+    dest: '{{ solr_dest_path }}/server/'
+    creates: '{{ solr_dest_path }}/contrib/hybris/solr'
   notify: restart solr windows
 
 - name: Force all notified handlers

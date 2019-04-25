@@ -1,7 +1,7 @@
 ---
 ## Global application env settings
 
-solr_version: 7.6.0
+solr_version: 7.5.0
 solr_contrib_hybris_patch_name: solr-contrib-HYBRISCOMM180800P_1-70003534.zip
 solr_data_hybris_patch_name: solr-data-HYBRISCOMM180800P_1-70003534.zip
 
