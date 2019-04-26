@@ -23,14 +23,14 @@
 
 - name: Install contrib hybris components
   win_unzip:
-    src: '{{ solr_dest_main_path }}/{{ solr_contrib_hybris_patch }}'
+    src: '{{ solr_contrib_hybris_patch }}'
     dest: '{{ solr_dest_path }}'
     creates: '{{ solr_dest_path }}/contrib/hybris'
   notify: restart solr windows
 
 - name: Install data hybris components
   win_unzip:
-    src: '{{ solr_dest_main_path }}/{{ solr_data_hybris_patch }}'
+    src: '{{ solr_data_hybris_patch }}'
     dest: '{{ solr_dest_path }}/server/'
     creates: '{{ solr_dest_path }}/contrib/hybris/solr'
   notify: restart solr windows
