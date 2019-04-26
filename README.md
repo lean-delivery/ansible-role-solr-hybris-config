@@ -83,7 +83,9 @@ Requirements
 
   - `download_path` - local folder for downloading patch
 
-    default: `/tmp`
+    default: `/tmp` for Linux OS
+
+    default: `C:\Windows\Temp` for Windows OS
 
   - `solr_dest_main_path` - root directory to store solr folder
 
