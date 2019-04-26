@@ -40,6 +40,18 @@ provisioner:
     ANSIBLE_LIBRARY: ${ANSIBLE_LIBRARY}
 scenario:
   name: cloud-epc-delegated
+  test_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+#    - idempotence
+    - side_effect
+    - verify
+    - destroy
 verifier:
   name: testinfra
   options:
