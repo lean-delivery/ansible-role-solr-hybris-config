@@ -85,7 +85,7 @@ Requirements
 
     default: `/tmp` for Linux OS
 
-    default: `C:\Windows\Temp` for Windows OS
+    default: `C:\Solr` for Windows OS
 
   - `solr_dest_main_path` - root directory to store solr folder
 

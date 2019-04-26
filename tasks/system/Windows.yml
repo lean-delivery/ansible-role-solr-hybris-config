@@ -25,7 +25,7 @@
   win_unzip:
     src: '{{ solr_dest_main_path }}/{{ solr_contrib_hybris_patch }}'
     dest: '{{ solr_dest_path }}'
-    creates: '{{ solr_dest_path }/contrib/hybris'
+    creates: '{{ solr_dest_path }}/contrib/hybris'
   notify: restart solr windows
 
 - name: Install data hybris components
