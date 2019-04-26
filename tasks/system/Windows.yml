@@ -12,12 +12,14 @@
     src: '{{ solr_contrib_hybris_patch }}'
     dest: '{{ solr_dest_main_path }}/'
     force: True
+    remote_src: True
 
 - name: Upload data hybris components
   win_copy:
     src: '{{ solr_data_hybris_patch }}'
     dest: '{{ solr_dest_main_path }}/'
     force: True
+    remote_src: True
 
 - name: Install contrib hybris components
   win_unzip:
