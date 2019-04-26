@@ -1,4 +1,35 @@
 ---
+- name: 'Install pip package'
+  package:
+    name: python-pip
+    state: present
+  register: status
+  until: status is succeeded
+  when: transport == 's3'
+  become: True
+
+- name: Install boto module
+  pip:
+    name:
+      - pip
+      - botocore
+      - boto
+      - boto3
+    state: present
+    extra_args: --upgrade
+  register: install_packages
+  until: install_packages is success
+  become: True
+  when: transport == 's3'
+
+- name: 'Fetch solr patch with {{ transport }} transport'
+  include_tasks: '{{ transport_driver }}'
+  with_first_found:
+    - 'fetch/{{ transport }}.yml'
+    - 'fetch/unknown-transport.yml'
+  loop_control:
+    loop_var: transport_driver
+
 - name: Install contrib hybris components
   unarchive:
     src: '{{ solr_contrib_hybris_patch }}'

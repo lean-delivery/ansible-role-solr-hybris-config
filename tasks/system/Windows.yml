@@ -1,4 +1,12 @@
 ---
+- name: 'Fetch solr patch with {{ transport }} transport'
+  include_tasks: '{{ transport_driver }}'
+  with_first_found:
+    - 'win_fetch/{{ transport }}.yml'
+    - 'fetch/unknown-transport.yml'
+  loop_control:
+    loop_var: transport_driver
+
 - name: Upload contrib hybris components
   win_copy:
     src: '{{ solr_contrib_hybris_patch }}'

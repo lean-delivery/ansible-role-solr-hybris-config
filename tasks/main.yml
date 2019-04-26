@@ -1,32 +1,10 @@
 ---
-- name: Install boto module
-  pip:
-    name:
-      - pip
-      - botocore
-      - boto
-      - boto3
-    state: present
-    extra_args: --upgrade
-  register: install_packages
-  until: install_packages is success
-  become: True
-  when: transport == 's3'
-
 - name: Load a variables
   include_vars: '{{ item }}'
   with_first_found:
     - '{{ ansible_system }}.yml'
     - '{{ ansible_os_family }}.yml'
     - 'system/not-supported.yml'
-
-- name: 'Fetch solr patch with {{ transport }} transport'
-  include_tasks: '{{ transport_driver }}'
-  with_first_found:
-    - 'fetch/{{ transport }}.yml'
-    - 'fetch/unknown-transport.yml'
-  loop_control:
-    loop_var: transport_driver
 
 - name: Choose platform based task
   include_tasks: '{{ platform }}'

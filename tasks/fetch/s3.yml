@@ -7,7 +7,9 @@
     aws_access_key: '{{ transport_s3_aws_access_key }}'
     aws_secret_key: '{{ transport_s3_aws_secret_key }}'
     mode: get
+    overwrite: different
   retries: 5
+  delay: 2
 
 - name: Download data artifact from s3
   aws_s3:
@@ -17,7 +19,9 @@
     aws_access_key: '{{ transport_s3_aws_access_key }}'
     aws_secret_key: '{{ transport_s3_aws_secret_key }}'
     mode: get
+    overwrite: different
   retries: 5
+  delay: 2
 
 - name: Downloaded artifact
   set_fact:

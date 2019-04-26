@@ -1,0 +1,25 @@
+---
+- name: Download contrib artifact from web
+  win_get_url:
+    url: '{{ transport_web }}/{{ solr_contrib_hybris_patch_name }}'
+    dest: '{{ download_path }}/{{ solr_contrib_hybris_patch_name }}'
+    force: False
+  register: contrib_file_downloaded
+  until: contrib_file_downloaded is succeeded
+  retries: 5
+  delay: 2
+
+- name: Download data artifact from web
+  win_get_url:
+    url: '{{ transport_web }}/{{ solr_data_hybris_patch_name }}'
+    dest: '{{ download_path }}/{{ solr_data_hybris_patch_name }}'
+    force: False
+  register: data_file_downloaded
+  until: data_file_downloaded is succeeded
+  retries: 5
+  delay: 2
+
+- name: Downloaded artifact
+  set_fact:
+    solr_contrib_hybris_patch: '{{ contrib_file_downloaded.dest }}'
+    solr_data_hybris_patch: '{{ data_file_downloaded.dest }}'
