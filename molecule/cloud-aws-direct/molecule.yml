@@ -13,6 +13,7 @@ platforms:
   - name: test-aws-centos7-solr-hybris-config
     image: ami-9887c6e7
     instance_type: m5.large
+    profile_name: epmldi-instance-profile
     region: us-east-1
     vpc_subnet_id: subnet-05a2ef2b767afec50
     assign_public_ip: False
@@ -43,6 +44,7 @@ platforms:
   - name: test-aws-ubuntu18-solr-hybris-config
     image: ami-012fd5eb46f56731f
     instance_type: m5.large
+    profile_name: epmldi-instance-profile
     region: us-east-1
     vpc_subnet_id: subnet-05a2ef2b767afec50
     assign_public_ip: False
@@ -79,8 +81,6 @@ provisioner:
         transport: s3
         transport_s3_bucket: hybrisartifacts
         transport_s3_path: /static/solr-hybris
-        transport_s3_aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
-        transport_s3_aws_secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
       web:
         transport: web
         transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'
