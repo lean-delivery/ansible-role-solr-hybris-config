@@ -2,8 +2,8 @@
 - name: 'Fetch solr patch with {{ transport }} transport'
   include_tasks: '{{ transport_driver }}'
   with_first_found:
-    - 'win_fetch/{{ transport }}.yml'
-    - 'fetch/unknown-transport.yml'
+    - '../win_fetch/{{ transport }}.yml'
+    - '../fetch/unknown-transport.yml'
   loop_control:
     loop_var: transport_driver
 
