@@ -3,6 +3,7 @@
   hosts: all
   roles:
     - role: lean_delivery.java
+      transport: openjdk-fallback
     - role: lean_delivery.solr_standalone
     - role: ansible-role-solr-hybris-config
   vars:
