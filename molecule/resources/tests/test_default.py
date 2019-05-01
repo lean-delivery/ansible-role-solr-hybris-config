@@ -19,12 +19,3 @@ def test_systemd(host):
 
     assert s.is_running
     assert s.is_enabled
-
-
-def test_solr_file(host):
-    avars = host.ansible.get_variables()
-    f1 = host.file("/".join(avars["solr_dest_path"], "contrib/hybris"))
-    f2 = host.file("/".join(avars["solr_home"], "configsets/default"))
-
-    assert f1.exists
-    assert f2.exists
