@@ -13,7 +13,7 @@ This role:
 
 Requirements
 ------------
-  - Minimal Version of the ansible for installation: 2.5
+  - Minimal Version of the ansible for installation: 2.7
   - **Java 8** [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-java.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-java)
   - **Solr installed** [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-solr.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-solr)
   - **Supported OS**:
@@ -26,6 +26,7 @@ Requirements
       - "Windows Server 2012"
       - "Windows Server 2012 R2"
       - "Windows Server 2016"
+      - "Windows Server 2019"
       - "Windows 7"
       - "Windows 8.1"
       - "Windows 10"
@@ -120,19 +121,38 @@ Requirements
   - `solr_with_systemd` - to run solr as a service
 
     default: `True`
+  - `solr_service_start` - to start solr service in the end of role/Playbook
+    default: `True`
 
-Patch Creation
+## Patch Creation
 ----------------
 Bash script files/create-solr-extras.sh can be used to create patch file.
-Change following varibles in file before run:
-  - `artifactory` - http or local path to hybris package
-  - `package` - hybris package name
-  - `zip_extension` - package extension
-  - `zip_file` - output file name
+Run with following parameters:
+  `-a` - folder or web source with hybris archive. Patches will be stored here too
+
+  Default is /opt/installs
+
+  `-p` - Hybris package name
+
+  Default is HYBRISCOMM180800P_0-70003534
+
+  `-e` - Hybris package extension
+
+  Default is ZIP
+
+  `-c` - Contrib patch file name
+
+  Default is solr-contrib-$package
+
+  `-d` - Elasticsearch index name
+
+  Default is solr-data-$package
+
 After patch creation please upload it to destination and set transport parameters.
 
 Example Inventory
 ----------------
+```ini
 [solr]
 solr.example.com
 
@@ -144,6 +164,7 @@ ansible_user=admin
 ansible_password=password
 ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore
+```
 
 Example Playbook
 ----------------
@@ -152,9 +173,9 @@ Example Playbook
 - name: Configure Solr for SAP Hybris
   hosts: solr
   roles:
-    - role: lean-delivery.java
-    - role: lean-delivery.solr_standalone
-    - role: lean-delivery.solr_hybris_config
+    - role: lean_delivery.java
+    - role: lean_delivery.solr_standalone
+    - role: lean_delivery.solr_hybris_config
 ```
 
 License

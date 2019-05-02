@@ -26,14 +26,18 @@
     src: '{{ solr_contrib_hybris_patch }}'
     dest: '{{ solr_dest_path }}'
     creates: '{{ solr_dest_path }}/contrib/hybris'
-  notify: restart solr windows
+  notify: restart Solr Windows
 
 - name: Install data hybris components
   win_unzip:
     src: '{{ solr_data_hybris_patch }}'
     dest: '{{ solr_dest_path }}/server/'
     creates: '{{ solr_dest_path }}/contrib/hybris/solr'
-  notify: restart solr windows
+  notify: restart Solr Windows
 
-- name: Force all notified handlers
-  meta: flush_handlers
+- name: start Solr Windows
+  win_service:
+    name: '{{ solr_service_name }}'
+    state: started
+  when:
+    - solr_service_start

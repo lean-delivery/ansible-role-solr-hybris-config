@@ -41,7 +41,7 @@
     remote_src: True
   become: True
   notify:
-    - restart solr linux
+    - restart Solr Linux
 
 - name: Install data hybris components
   unarchive:
@@ -54,7 +54,13 @@
     remote_src: True
   become: True
   notify:
-    - restart solr linux
+    - restart Solr Linux
 
-- name: Force all notified handlers
-  meta: flush_handlers
+- name: Start service
+  service:
+    name: '{{ solr_service_name }}'
+    state: started
+    enabled: True
+  become: True
+  when:
+    - solr_service_start
