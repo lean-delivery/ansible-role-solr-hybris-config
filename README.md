@@ -121,7 +121,9 @@ Requirements
   - `solr_with_systemd` - to run solr as a service
 
     default: `True`
+
   - `solr_service_start` - to start solr service in the end of role/Playbook
+
     default: `True`
 
 ## Patch Creation
