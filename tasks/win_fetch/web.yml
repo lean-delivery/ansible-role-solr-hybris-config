@@ -1,7 +1,7 @@
 ---
 - name: Download contrib artifact from web
   win_get_url:
-    url: '{{ transport_web }}/{{ solr_contrib_hybris_patch_name }}'
+    url: '{{ solr_patch_transport_web }}/{{ solr_contrib_hybris_patch_name }}'
     dest: '{{ download_path }}/{{ solr_contrib_hybris_patch_name }}'
     force: False
   register: contrib_file_downloaded
@@ -11,7 +11,7 @@
 
 - name: Download data artifact from web
   win_get_url:
-    url: '{{ transport_web }}/{{ solr_data_hybris_patch_name }}'
+    url: '{{ solr_patch_transport_web }}/{{ solr_data_hybris_patch_name }}'
     dest: '{{ download_path }}/{{ solr_data_hybris_patch_name }}'
     force: False
   register: data_file_downloaded

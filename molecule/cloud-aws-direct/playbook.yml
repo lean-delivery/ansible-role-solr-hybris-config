@@ -2,12 +2,6 @@
 - name: Converge
   hosts: all
   roles:
-    - role: lean_delivery.java
-      transport: openjdk-fallback
-    - role: lean_delivery.solr_standalone
     - role: ansible-role-solr-hybris-config
   vars:
     solr_version: 7.5.0
-    solr_change_default_password: False
-    solr_auth_configure: False
-    solr_use_java_version_8: False

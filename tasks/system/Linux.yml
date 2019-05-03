@@ -1,57 +1,30 @@
 ---
-- name: 'Install pip package'
-  package:
-    name: python-pip
-    state: present
-  register: status
-  until: status is succeeded
-  become: True
-  when: transport == 's3'
-
-- name: Install boto module
-  pip:
-    name:
-      - pip
-      - botocore
-      - boto
-      - boto3
-    state: present
-    extra_args: --upgrade
-  register: install_packages
-  until: install_packages is success
-  become: True
-  when: transport == 's3'
-
-- name: 'Fetch solr patch with {{ transport }} transport'
+- name: 'Fetch solr patch with {{ solr_patch_transport }} transport'
   include_tasks: '{{ transport_driver }}'
   with_first_found:
-    - '../fetch/{{ transport }}.yml'
+    - '../fetch/{{ solr_patch_transport }}.yml'
     - '../fetch/unknown-transport.yml'
   loop_control:
     loop_var: transport_driver
 
-- name: Install contrib hybris components
+- name: Install solr patch hybris components
   unarchive:
-    src: '{{ solr_contrib_hybris_patch }}'
-    dest: '{{ solr_dest_path }}'
+    src: '{{ patch_conf_file.patch_src }}'
+    dest: '{{ patch_conf_file.patch_dest }}'
     owner: '{{ solr_user }}'
     group: '{{ solr_group }}'
     mode: 0755
-    creates: '{{ solr_dest_path }}/contrib/hybris'
+    creates: '{{ patch_conf_file.patch_creates }}'
     remote_src: True
-  become: True
-  notify:
-    - restart Solr Linux
-
-- name: Install data hybris components
-  unarchive:
-    src: '{{ solr_data_hybris_patch }}'
-    dest: '{{ solr_home }}'
-    owner: '{{ solr_user }}'
-    group: '{{ solr_group }}'
-    mode: 0755
-    creates: '{{ solr_home }}/configsets/default'
-    remote_src: True
+  loop:
+    - patch_src: '{{ solr_contrib_hybris_patch }}'
+      patch_dest: '{{ solr_dest_path }}'
+      patch_creates: '{{ solr_dest_path }}/contrib/hybris'
+    - patch_src: '{{ solr_data_hybris_patch }}'
+      patch_dest: '{{ solr_home }}'
+      patch_creates: '{{ solr_home }}/configsets/default'
+    loop_control:
+      loop_var: patch_conf_file
   become: True
   notify:
     - restart Solr Linux

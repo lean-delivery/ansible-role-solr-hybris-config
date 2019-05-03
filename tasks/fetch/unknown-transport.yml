@@ -2,5 +2,5 @@
 - name: Warn on unsupported transport
   fail:
     msg: |
-      This role does not support '{{ transport }}' transport.
+      This role does not support '{{ solr_patch_transport }}' transport.
       Please contact team@lean-delivery.com

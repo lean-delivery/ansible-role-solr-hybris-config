@@ -3,7 +3,7 @@ Solr Configuration for SAP Hybris
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-solr-hybris-config/master/LICENSE)
 [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-solr-hybris-config.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-solr-hybris-config)
 [![Build Status](https://gitlab.com/lean-delivery/ansible-role-solr-hybris-config/badges/master/build.svg)](https://gitlab.com/lean-delivery/ansible-role-solr-hybris-config/pipelines)
-[![Galaxy](https://img.shields.io/badge/galaxy-lean__delivery.solr-hybris-config-blue.svg)](https://galaxy.ansible.com/lean_delivery/solr-hybris-config)
+[![Galaxy](https://img.shields.io/badge/galaxy-lean__delivery.solr__hybris__config-blue.svg)](https://galaxy.ansible.com/lean_delivery/solr_hybris_config)
 ![Ansible](https://img.shields.io/ansible/role/d/30253.svg)
 ![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F30253%2F&query=$.min_ansible_version)
 ## Summary
@@ -20,6 +20,8 @@ Requirements
     - CentOS
       - 7
     - Ubuntu
+    - Debian
+      - 9
     - Windows
       - "Windows Server 2008"
       - "Windows Server 2008 R2"
@@ -46,7 +48,7 @@ Requirements
 
     default: `solr-data-HYBRISCOMM180800P_1-70003534.zip`
 
-  - `transport` - solr patch source transport
+  - `solr_patch_transport` - solr patch source transport
 
     default: `local`
 
@@ -58,27 +60,27 @@ Requirements
 
      - `s3` - fetch patch from s3 bucket
 
-  - `transport_web` - URI for http/https patch
+  - `solr_patch_transport_web` - URI for http/https patch
 
     default: `http://my-storage.example.com`
 
-  - `transport_local` - path for local patch directory
+  - `solr_patch_transport_local` - path for local patch directory
 
     default: `/tmp`
 
-  - `transport_s3_bucket` - s3 bucket name
+  - `solr_patch_transport_s3_bucket` - s3 bucket name
 
     default: `s3_bucket`
 
-  - `transport_s3_path` - path to patch folder in bucket
+  - `solr_patch_transport_s3_path` - path to patch folder in bucket
 
     default: `/folder`
 
-  - `transport_s3_aws_access_key` - aws key. Need to set in role or set as parameter or set env variables according https://docs.ansible.com/ansible/latest/modules/aws_s3_module.html
+  - `solr_patch_transport_s3_aws_access_key` - aws key. Need to set in role or set as parameter or set env variables according https://docs.ansible.com/ansible/latest/modules/aws_s3_module.html
 
     default: `undefined`
 
-  - `transport_s3_aws_secret_key` - aws secret key. Need to set in role or set as parameter or set env variables according https://docs.ansible.com/ansible/latest/modules/aws_s3_module.html
+  - `solr_patch_transport_s3_aws_secret_key` - aws secret key. Need to set in role or set as parameter or set env variables according https://docs.ansible.com/ansible/latest/modules/aws_s3_module.html
 
     default: `undefined`
 

@@ -29,7 +29,7 @@ provisioner:
   log: True
   playbooks:
     create: ../resources/provisioning/EPC/create.yml
-    prepare: ../resources/provisioning/EPC/prepare.yml
+    prepare: ../resources/prepare.yml
     destroy: ../resources/provisioning/EPC/destroy.yml
   config_options:
     ssh_connection:
@@ -40,18 +40,6 @@ provisioner:
     ANSIBLE_LIBRARY: ${ANSIBLE_LIBRARY}
 scenario:
   name: cloud-epc-delegated
-  test_sequence:
-    - lint
-    - destroy
-    - dependency
-    - syntax
-    - create
-    - prepare
-    - converge
-#    - idempotence
-    - side_effect
-    - verify
-    - destroy
 verifier:
   name: testinfra
   options:

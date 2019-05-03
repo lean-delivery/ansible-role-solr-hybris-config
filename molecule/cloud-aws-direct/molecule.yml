@@ -86,7 +86,7 @@ provisioner:
         transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'
   playbooks:
     create: ../resources/provisioning/AWS/create.yml
-    prepare: ../resources/provisioning/AWS/prepare.yml
+    prepare: ../resources/prepare.yml
     destroy: ../resources/provisioning/AWS/destroy.yml
   lint:
     name: ansible-lint
@@ -94,18 +94,6 @@ provisioner:
     ANSIBLE_LIBRARY: ${ANSIBLE_LIBRARY}
 scenario:
   name: cloud-aws-direct
-  test_sequence:
-    - lint
-    - destroy
-    - dependency
-    - syntax
-    - create
-    - prepare
-    - converge
-#    - idempotence
-    - side_effect
-    - verify
-    - destroy
 verifier:
   name: testinfra
   options:

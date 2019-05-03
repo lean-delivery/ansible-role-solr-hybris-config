@@ -1,25 +1,23 @@
 ---
-- name: 'Fetch solr patch with {{ transport }} transport'
+- name: 'Fetch solr patch with {{ solr_patch_transport }} transport'
   include_tasks: '{{ transport_driver }}'
   with_first_found:
-    - '../win_fetch/{{ transport }}.yml'
+    - '../win_fetch/{{ solr_patch_transport }}.yml'
     - '../fetch/unknown-transport.yml'
   loop_control:
     loop_var: transport_driver
 
-- name: Upload contrib hybris components
+- name: Upload contrib and data hybris components
   win_copy:
-    src: '{{ solr_contrib_hybris_patch }}'
+    src: '{{ hybris_patch_file }}'
     dest: '{{ solr_dest_main_path }}/'
     force: True
     remote_src: True
-
-- name: Upload data hybris components
-  win_copy:
-    src: '{{ solr_data_hybris_patch }}'
-    dest: '{{ solr_dest_main_path }}/'
-    force: True
-    remote_src: True
+  loop:
+    - '{{ solr_contrib_hybris_patch }}'
+    - '{{ solr_data_hybris_patch }}'
+  loop_control:
+    loop_var: hybris_patch_file
 
 - name: Install contrib hybris components
   win_unzip:
