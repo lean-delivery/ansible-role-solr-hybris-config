@@ -19,14 +19,14 @@
   loop_control:
     loop_var: hybris_patch_file
 
-- name: Create data temporary directories
+- name: Create data temporary directory
   win_tempfile:
     state: directory
     suffix: solr_hybris_data
   register: hybris_solr_data_temp_dir
   changed_when: False
 
-- name: Create contrib temporary directories
+- name: Create contrib temporary directory
   win_tempfile:
     state: directory
     suffix: solr_hybris_contrib
@@ -48,27 +48,21 @@
 - name: Copy data components
   win_robocopy:
     src: '{{ hybris_solr_data_temp_dir.path }}'
-    dest: '{{ solr_dest_path }}/server'
+    dest: '{{ solr_dest_path }}/server/'
     recurse: True
-    purge: True
   notify: restart Solr Windows
 
 - name: Copy contrib components
   win_robocopy:
     src: '{{ hybris_solr_contrib_temp_dir.path }}'
-    dest: '{{ solr_dest_path }}'
+    dest: '{{ solr_dest_path }}/'
     recurse: True
-    purge: True
   notify: restart Solr Windows
 
 - name: Solr Windows state
   win_service:
     name: '{{ solr_service_name }}'
   register: solr_serv_state
-
-- name: Debug
-  debug:
-    var: solr_serv_state
 
 - name: start Solr Windows
   win_service:
