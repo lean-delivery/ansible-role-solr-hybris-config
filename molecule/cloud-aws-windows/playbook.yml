@@ -3,7 +3,7 @@
   hosts: all
   roles:
     - role: ansible-role-solr-hybris-config
-      transport: web
-      transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'
+      solr_patch_transport: web
+      solr_patch_transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'
   vars:
     solr_version: 7.5.0
