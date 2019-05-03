@@ -81,6 +81,8 @@ provisioner:
         solr_patch_transport: s3
         solr_patch_transport_s3_bucket: hybrisartifacts
         solr_patch_transport_s3_path: /static/solr-hybris
+        transport_s3_aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
+        transport_s3_aws_secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY')}"
       web:
         solr_patch_transport: web
         solr_patch_transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'

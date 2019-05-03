@@ -7,7 +7,7 @@
   loop_control:
     loop_var: transport_driver
 
-- name: Upload contrib and data hybris components
+- name: Copy contrib and data hybris components
   win_copy:
     src: '{{ hybris_patch_file }}'
     dest: '{{ solr_dest_main_path }}/'
@@ -19,18 +19,18 @@
   loop_control:
     loop_var: hybris_patch_file
 
-- name: Install contrib hybris components
-  win_unzip:
-    src: '{{ solr_contrib_hybris_patch }}'
-    dest: '{{ solr_dest_path }}'
-    creates: '{{ solr_dest_path }}/contrib/hybris'
-  notify: restart Solr Windows
-
 - name: Install data hybris components
   win_unzip:
     src: '{{ solr_data_hybris_patch }}'
     dest: '{{ solr_dest_path }}/server/'
     creates: '{{ solr_dest_path }}/contrib/hybris/solr'
+  notify: restart Solr Windows
+
+- name: Install contrib hybris components
+  win_unzip:
+    src: '{{ solr_contrib_hybris_patch }}'
+    dest: '{{ solr_dest_path }}'
+    creates: '{{ solr_dest_path }}/contrib/hybris'
   notify: restart Solr Windows
 
 - name: start Solr Windows
