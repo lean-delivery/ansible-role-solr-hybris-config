@@ -37,11 +37,13 @@
   win_unzip:
     src: '{{ solr_data_hybris_patch }}'
     dest: '{{ hybris_solr_data_temp_dir.path }}'
+  changed_when: False
 
 - name: Unzip contrib hybris components
   win_unzip:
     src: '{{ solr_contrib_hybris_patch }}'
     dest: '{{ hybris_solr_contrib_temp_dir.path }}'
+  changed_when: False
 
 - name: Copy data components
   win_robocopy:
