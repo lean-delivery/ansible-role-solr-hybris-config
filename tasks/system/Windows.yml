@@ -19,31 +19,44 @@
   loop_control:
     loop_var: hybris_patch_file
 
-- name: Create temporary directories
+- name: Create data temporary directories
   win_tempfile:
     state: directory
-    suffix: solr_hybris
-  register: hybris_solr_temp_dirs
-  loop:
-    - contrib
-    - data
+    suffix: solr_hybris_data
+  register: hybris_solr_data_temp_dir
+  changed_when: False
 
-- name: Debug var
-  debug:
-    var: hybris_solr_temp_dirs
+- name: Create contrib temporary directories
+  win_tempfile:
+    state: directory
+    suffix: solr_hybris_contrib
+  register: hybris_solr_contrib_temp_dir
+  changed_when: False
 
-- name: Install data hybris components
+- name: Unzip data hybris components
   win_unzip:
     src: '{{ solr_data_hybris_patch }}'
-    dest: '{{ solr_dest_path }}/server/'
-    creates: '{{ solr_dest_path }}/contrib/hybris/solr'
-  notify: restart Solr Windows
+    dest: '{{ hybris_solr_data_temp_dir.results.path }}'
 
-- name: Install contrib hybris components
+- name: Unzip contrib hybris components
   win_unzip:
     src: '{{ solr_contrib_hybris_patch }}'
+    dest: '{{ hybris_solr_contrib_temp_dir.results.path }}'
+
+- name: Copy data components
+  win_robocopy:
+    src: '{{ hybris_solr_data_temp_dir.results.path }}'
+    dest: '{{ solr_dest_path }}/server'
+    recurse: True
+    purge: True
+  notify: restart Solr Windows
+
+- name: Copy contrib components
+  win_robocopy:
+    src: '{{ hybris_solr_contrib_temp_dir.results.path }}'
     dest: '{{ solr_dest_path }}'
-    creates: '{{ solr_dest_path }}/contrib/hybris'
+    recurse: True
+    purge: True
   notify: restart Solr Windows
 
 - name: start Solr Windows
