@@ -31,7 +31,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        solr_version: 7.4.0
+        solr_version: 7.5.0
       windows:
         ansible_password: "{{ lookup('env', 'WINRM_ADMIN_PWD') | default('M0leCule123!', True) }}"
         ansible_winrm_transport: credssp

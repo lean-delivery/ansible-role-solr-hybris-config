@@ -78,7 +78,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        solr_version: 7.4.0
+        solr_version: 7.5.0
       s3:
         solr_patch_transport: s3
         solr_patch_transport_s3_bucket: hybrisartifacts

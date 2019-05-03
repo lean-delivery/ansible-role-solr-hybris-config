@@ -30,7 +30,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        solr_version: 7.4.0
+        solr_version: 7.5.0
   playbooks:
     create: ../resources/provisioning/EPC/create.yml
     prepare: ../resources/prepare.yml
