@@ -74,3 +74,4 @@
     solr_change_default_password: False
     solr_auth_configure: False
     solr_use_java_version_8: False
+    solr_ssl_configure: False
