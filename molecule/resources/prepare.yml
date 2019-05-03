@@ -70,7 +70,7 @@
   roles:
    - role: lean_delivery.solr_standalone
   vars:
-    solr_version: 7.5.0
+    solr_version: 7.4.0
     solr_change_default_password: False
     solr_auth_configure: False
     solr_use_java_version_8: False
