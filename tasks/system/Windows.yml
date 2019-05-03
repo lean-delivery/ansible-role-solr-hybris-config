@@ -19,6 +19,18 @@
   loop_control:
     loop_var: hybris_patch_file
 
+- name: Create temporary directories
+  win_tempfile:
+    state: directory
+    suffix: solr_hybris
+  register: hybris_solr_temp_dirs
+  loop:
+    - contrib
+    - data
+
+- debug:
+  var: hybris_solr_temp_dirs
+
 - name: Install data hybris components
   win_unzip:
     src: '{{ solr_data_hybris_patch }}'
