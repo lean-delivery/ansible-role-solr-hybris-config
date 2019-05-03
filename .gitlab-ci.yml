@@ -25,14 +25,14 @@ Ansible lint:
   tags:
     - aws
 
-Docker solr-hybris-config:
+.Docker solr-hybris-config:
   stage: deployment test
   script:
     - molecule test -s default
   tags:
     - aws
 
-AWS solr-hybris-config:
+.AWS solr-hybris-config:
   variables:
     AWS_REGION: us-east-1
   stage: deployment test
@@ -50,7 +50,7 @@ AWS Windows solr-hybris-config:
   tags:
     - aws
 
-EPC solr-hybris-config:
+.EPC solr-hybris-config:
   variables:
     EPC_REGION: EPAM-BY2
   stage: deployment test

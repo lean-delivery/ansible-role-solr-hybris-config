@@ -28,8 +28,9 @@
     - contrib
     - data
 
-- debug:
-  var: hybris_solr_temp_dirs
+- name: Debug var
+  debug:
+    var: hybris_solr_temp_dirs
 
 - name: Install data hybris components
   win_unzip:
