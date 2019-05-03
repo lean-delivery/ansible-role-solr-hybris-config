@@ -32,6 +32,10 @@ platforms:
 provisioner:
   name: ansible
   # log: True
+  inventory:
+    group_vars:
+      all:
+        solr_version: 7.4.0
   playbooks:
     prepare: ../resources/prepare.yml
   lint:

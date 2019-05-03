@@ -3,5 +3,3 @@
   hosts: all
   roles:
     - role: ansible-role-solr-hybris-config
-  vars:
-    solr_version: 7.5.0

@@ -61,6 +61,15 @@
     purge: True
   notify: restart Solr Windows
 
+- name: Solr Windows state
+  win_service:
+    name: '{{ solr_service_name }}'
+  register: solr_serv_state
+
+- name: Debug
+  debug:
+    var: solr_serv_state
+
 - name: start Solr Windows
   win_service:
     name: '{{ solr_service_name }}'
