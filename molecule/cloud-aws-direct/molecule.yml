@@ -78,12 +78,12 @@ provisioner:
   inventory:
     group_vars:
       s3:
-        transport: s3
-        transport_s3_bucket: hybrisartifacts
-        transport_s3_path: /static/solr-hybris
+        solr_patch_transport: s3
+        solr_patch_transport_s3_bucket: hybrisartifacts
+        solr_patch_transport_s3_path: /static/solr-hybris
       web:
-        transport: web
-        transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'
+        solr_patch_transport: web
+        solr_patch_transport_web: '{{ lookup("env","STORAGE_AWS") }}/hybris-solr'
   playbooks:
     create: ../resources/provisioning/AWS/create.yml
     prepare: ../resources/prepare.yml
