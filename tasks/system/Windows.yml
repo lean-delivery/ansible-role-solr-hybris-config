@@ -36,16 +36,16 @@
 - name: Unzip data hybris components
   win_unzip:
     src: '{{ solr_data_hybris_patch }}'
-    dest: '{{ hybris_solr_data_temp_dir.results.path }}'
+    dest: '{{ hybris_solr_data_temp_dir.path }}'
 
 - name: Unzip contrib hybris components
   win_unzip:
     src: '{{ solr_contrib_hybris_patch }}'
-    dest: '{{ hybris_solr_contrib_temp_dir.results.path }}'
+    dest: '{{ hybris_solr_contrib_temp_dir.path }}'
 
 - name: Copy data components
   win_robocopy:
-    src: '{{ hybris_solr_data_temp_dir.results.path }}'
+    src: '{{ hybris_solr_data_temp_dir.path }}'
     dest: '{{ solr_dest_path }}/server'
     recurse: True
     purge: True
@@ -53,7 +53,7 @@
 
 - name: Copy contrib components
   win_robocopy:
-    src: '{{ hybris_solr_contrib_temp_dir.results.path }}'
+    src: '{{ hybris_solr_contrib_temp_dir.path }}'
     dest: '{{ solr_dest_path }}'
     recurse: True
     purge: True
