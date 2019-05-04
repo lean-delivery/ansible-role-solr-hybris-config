@@ -17,10 +17,10 @@
     creates: '{{ patch_conf_file.patch_creates }}'
     remote_src: True
   loop:
-    - patch_src: '{{ solr_contrib_hybris_patch }}'
+    - patch_src: '{{ solr_hybris_patch_contrib }}'
       patch_dest: '{{ solr_dest_path }}'
       patch_creates: '{{ solr_dest_path }}/contrib/hybris'
-    - patch_src: '{{ solr_data_hybris_patch }}'
+    - patch_src: '{{ solr_hybris_patch_data }}'
       patch_dest: '{{ solr_home }}'
       patch_creates: '{{ solr_home }}/configsets/default'
   loop_control:

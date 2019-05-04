@@ -14,8 +14,8 @@
     force: True
     remote_src: True
   loop:
-    - '{{ solr_contrib_hybris_patch }}'
-    - '{{ solr_data_hybris_patch }}'
+    - '{{ solr_hybris_patch_contrib }}'
+    - '{{ solr_hybris_patch_data }}'
   loop_control:
     loop_var: hybris_patch_file
 
@@ -35,13 +35,13 @@
 
 - name: Unzip data hybris components
   win_unzip:
-    src: '{{ solr_data_hybris_patch }}'
+    src: '{{ solr_hybris_patch_data }}'
     dest: '{{ hybris_solr_data_temp_dir.path }}'
   changed_when: False
 
 - name: Unzip contrib hybris components
   win_unzip:
-    src: '{{ solr_contrib_hybris_patch }}'
+    src: '{{ solr_hybris_patch_contrib }}'
     dest: '{{ hybris_solr_contrib_temp_dir.path }}'
   changed_when: False
 

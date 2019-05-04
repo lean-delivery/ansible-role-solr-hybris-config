@@ -19,5 +19,5 @@
 
 - name: Downloaded artifact
   set_fact:
-    solr_contrib_hybris_patch: '{{ contrib_file_downloaded.dest }}'
-    solr_data_hybris_patch: '{{ data_file_downloaded.dest }}'
+    solr_hybris_patch_contrib: '{{ contrib_file_downloaded.dest }}'
+    solr_hybris_patch_data: '{{ data_file_downloaded.dest }}'
