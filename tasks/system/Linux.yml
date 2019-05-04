@@ -1,27 +1,39 @@
 ---
-- name: "Install contrib hybris components"
+- name: 'Fetch solr patch with {{ solr_patch_transport }} transport'
+  include_tasks: '{{ transport_driver }}'
+  with_first_found:
+    - '../fetch/{{ solr_patch_transport }}.yml'
+    - '../fetch/unknown-transport.yml'
+  loop_control:
+    loop_var: transport_driver
+
+- name: Install solr patch hybris components
   unarchive:
-    src: "{{ solr_contrib_hybris_patch }}"
-    dest: "{{ dest_solr_path }}"
-    owner: "{{ solr_user }}"
-    group: "{{ solr_group }}"
+    src: '{{ patch_conf_file.patch_src }}'
+    dest: '{{ patch_conf_file.patch_dest }}'
+    owner: '{{ solr_user }}'
+    group: '{{ solr_group }}'
     mode: 0755
-    creates: "{{ dest_solr_path }}/contrib/hybris"
+    creates: '{{ patch_conf_file.patch_creates }}'
+    remote_src: True
+  loop:
+    - patch_src: '{{ solr_hybris_patch_contrib }}'
+      patch_dest: '{{ solr_dest_path }}'
+      patch_creates: '{{ solr_dest_path }}/contrib/hybris'
+    - patch_src: '{{ solr_hybris_patch_data }}'
+      patch_dest: '{{ solr_home }}'
+      patch_creates: '{{ solr_home }}/configsets/default'
+  loop_control:
+    loop_var: patch_conf_file
   become: True
   notify:
-    - "restart solr linux"
+    - restart Solr Linux
 
-- name: "Install data hybris components"
-  unarchive:
-    src: "{{ solr_data_hybris_patch }}"
-    dest: "{{ solr_home }}"
-    owner: "{{ solr_user }}"
-    group: "{{ solr_group }}"
-    mode: 0755
-    creates: "{{ solr_home }}/configsets/default"
+- name: Start service
+  service:
+    name: '{{ solr_service_name }}'
+    state: started
+    enabled: True
   become: True
-  notify:
-    - "restart solr linux"
-
-- name: "Force all notified handlers"
-  meta: flush_handlers
+  when:
+    - solr_service_start

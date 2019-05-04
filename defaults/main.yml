@@ -1,29 +1,32 @@
 ---
 ## Global application env settings
 
-solr_version: 7.1.0
-solr_contrib_hybris_patch_name: solr-contrib-HYBRISCOMM6600P_0-70003031.zip
-solr_data_hybris_patch_name: solr-data-HYBRISCOMM6600P_0-70003031.zip
+solr_version: 7.5.0
+solr_contrib_hybris_patch_name: solr-contrib-HYBRISCOMM180800P_1-70003534.zip
+solr_data_hybris_patch_name: solr-data-HYBRISCOMM180800P_1-70003534.zip
 
 # artifact source transport
-transport: "local"
+solr_patch_transport: local
 # available are:
 # - "web" Fetching patch from custom web uri
 # - "local" Local patch
 # - "s3" fetch patch from s3 bucket
 
-transport_web: "http://my-storage.example.com"
-transport_local: "/tmp"
-transport_s3_bucket: "s3_bucket"
-transport_s3_path: "/folder"
+solr_patch_transport_web: 'http://my-storage.example.com'
+solr_patch_transport_local: /tmp
+solr_patch_transport_s3_bucket: s3_bucket
+solr_patch_transport_s3_path: /folder
 
 # path to download patch
-download_path: "/tmp"
+download_path: '{{ default_download_path }}'
 
-solr_service_name: "solr"
+solr_service_name: solr
 solr_with_systemd: True
+solr_service_start: True
 
-solr_user: "solr"
-solr_group: "solr"
+solr_user: solr
+solr_group: solr
 solr_base_path: /var/solr
-solr_home: "{{ solr_base_path }}/data"
+solr_home: '{{ solr_base_path }}/data'
+solr_dest_main_path: '{{ default_solr_dest_main_path }}'
+solr_dest_path: '{{ default_solr_dest_path }}'

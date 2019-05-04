@@ -31,6 +31,13 @@ platforms:
       - debian_family
 provisioner:
   name: ansible
+  # log: True
+  inventory:
+    group_vars:
+      all:
+        solr_version: 7.5.0
+  playbooks:
+    prepare: ../resources/prepare.yml
   lint:
     name: ansible-lint
 scenario:
