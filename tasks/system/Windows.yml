@@ -48,7 +48,7 @@
 - name: Copy data components
   win_robocopy:
     src: '{{ hybris_solr_data_temp_dir.path }}'
-    dest: '{{ solr_dest_path }}/server/'
+    dest: '{{ solr_dest_path }}/server/solr/'
     recurse: True
   notify: restart Solr Windows
 
