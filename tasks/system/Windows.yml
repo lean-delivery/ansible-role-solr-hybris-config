@@ -59,6 +59,31 @@
     recurse: True
   notify: restart Solr Windows
 
+- name: Install solr maven libraries
+  maven_artifact:
+    group_id: '{{ solr_maven_group_id }}'
+    artifact_id: '{{ item }}'
+    version: '{{ solr_maven_libs_version }}'
+    repository_url: '{{ solr_maven_repository_url }}'
+    dest: '{{ solr_maven_libs_dest }}/{{ item }}-{{ solr_maven_libs_version }}.jar'
+  loop: '{{ solr_maven_libs_list }}'
+  notify:
+    - restart Solr Windows
+  when: when: solr_maven_libs_configure    
+
+- name: Install solr maven classifier libraries
+  maven_artifact:
+    group_id: '{{ solr_maven_group_id }}'
+    artifact_id: '{{ item }}'
+    version: '{{ solr_maven_libs_version }}'
+    classifier: '{{ solr_maven_classifier }}'
+    repository_url: '{{ solr_maven_repository_url }}'
+    dest: '{{ solr_maven_libs_dest }}/{{ item }}-{{ solr_maven_libs_version }}-{{ solr_maven_classifier }}.jar'
+  loop: '{{ solr_maven_libs_list }}'
+  notify:
+    - restart Solr Windows
+  when: solr_maven_libs_classifier_configure    
+
 - name: Solr Windows state
   win_service:
     name: '{{ solr_service_name }}'
