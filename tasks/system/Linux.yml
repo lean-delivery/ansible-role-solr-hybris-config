@@ -43,7 +43,7 @@
   become: True
   notify:
     - restart Solr Linux
-  when: solr_maven_libs_configure    
+  when: solr_maven_libs_configure
 
 - name: Install solr maven classifier libraries
   maven_artifact:
@@ -60,7 +60,7 @@
   become: True
   notify:
     - restart Solr Linux
-  when: solr_maven_libs_classifier_configure      
+  when: solr_maven_libs_classifier_configure
 
 - name: Start service
   service:

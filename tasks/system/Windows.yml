@@ -69,7 +69,7 @@
   loop: '{{ solr_maven_libs_list }}'
   notify:
     - restart Solr Windows
-  when: solr_maven_libs_configure    
+  when: solr_maven_libs_configure
 
 - name: Install solr maven classifier libraries
   maven_artifact:
@@ -82,7 +82,7 @@
   loop: '{{ solr_maven_libs_list }}'
   notify:
     - restart Solr Windows
-  when: solr_maven_libs_classifier_configure    
+  when: solr_maven_libs_classifier_configure
 
 - name: Solr Windows state
   win_service:
