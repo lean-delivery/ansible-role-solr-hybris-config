@@ -29,6 +29,47 @@
   notify:
     - restart Solr Linux
 
+- name: Install solr maven libraries
+  maven_artifact:
+    group_id: '{{ solr_maven_group_id }}'
+    artifact_id: '{{ item }}'
+    version: '{{ solr_maven_libs_version }}'
+    owner: '{{ solr_user }}'
+    group: '{{ solr_group }}'
+    mode: 0644
+    repository_url: '{{ solr_maven_repository_url }}'
+    dest: '{{ solr_maven_libs_dest }}/{{ item }}-{{ solr_maven_libs_version }}.jar'
+  loop: '{{ solr_maven_libs_list }}'
+  register: maven_libs_downloaded
+  until: maven_libs_downloaded is succeeded
+  retries: 3
+  delay: 2
+  become: True
+  notify:
+    - restart Solr Linux
+  when: solr_maven_libs_configure
+
+- name: Install solr maven classifier libraries
+  maven_artifact:
+    group_id: '{{ solr_maven_group_id }}'
+    artifact_id: '{{ item }}'
+    version: '{{ solr_maven_libs_version }}'
+    owner: '{{ solr_user }}'
+    group: '{{ solr_group }}'
+    mode: 0644
+    classifier: '{{ solr_maven_classifier }}'
+    repository_url: '{{ solr_maven_repository_url }}'
+    dest: '{{ solr_maven_libs_dest }}/{{ item }}-{{ solr_maven_libs_version }}-{{ solr_maven_classifier }}.jar'
+  loop: '{{ solr_maven_libs_list }}'
+  register: maven_libs_classifier_downloaded
+  until: maven_libs_classifier_downloaded is succeeded
+  retries: 3
+  delay: 2
+  become: True
+  notify:
+    - restart Solr Linux
+  when: solr_maven_libs_classifier_configure
+
 - name: Start service
   service:
     name: '{{ solr_service_name }}'

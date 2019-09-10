@@ -30,3 +30,18 @@ solr_base_path: /var/solr
 solr_home: '{{ solr_base_path }}/data'
 solr_dest_main_path: '{{ default_solr_dest_main_path }}'
 solr_dest_path: '{{ default_solr_dest_path }}'
+
+# maven libs
+solr_maven_libs_configure: False
+solr_maven_libs_classifier_configure: False
+solr_maven_libs_version: 2.1.1
+solr_maven_group_id: 'org.lionsoul'
+solr_maven_repository_url: 'https://repo1.maven.org/maven2'
+solr_maven_classifier: 'javadoc'
+solr_maven_libs_list:
+  - 'jcseg-analyzer'
+  - 'jcseg-core'
+  - 'jcseg-elasticsearch'
+  - 'jcseg-server'
+solr_maven_libs_dest: '{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib'
+
