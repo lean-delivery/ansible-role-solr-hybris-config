@@ -53,7 +53,7 @@ AWS Windows solr-hybris-config:
   tags:
     - aws
 
-EPC solr-hybris-config:
+.EPC solr-hybris-config:
   variables:
     EPC_REGION: EPAM-BY2
   stage: deployment test

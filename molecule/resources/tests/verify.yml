@@ -10,4 +10,4 @@
        that: |
                "'running' in ansible_facts.services['solr.service'].state"
                or
-               "'running' in ansible_facts.services['solr'].state"      
+               "'running' in ansible_facts.services['solr'].state"
