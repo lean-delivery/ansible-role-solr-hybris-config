@@ -27,9 +27,10 @@ platforms:
 
 provisioner:
   name: ansible
-  log: False
-  connection_options:
-    ansible_connection: winrm
+  log: false
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks,timer
   inventory:
     group_vars:
       all:
