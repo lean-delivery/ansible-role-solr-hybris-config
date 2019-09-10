@@ -41,9 +41,9 @@ provisioner:
         ansible_winrm_transport: credssp
         ansible_winrm_server_cert_validation: ignore
   playbooks:
-    create: ../resources/provisioning/WINRM/create.yml
+    create: ../resources/provisioning/AWS/create.yml
     prepare: ../resources/prepare.yml
-    destroy: ../resources/provisioning/WINRM/destroy.yml
+    destroy: ../resources/provisioning/AWS/destroy.yml
   lint:
     name: ansible-lint
 scenario:
