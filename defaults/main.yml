@@ -44,4 +44,3 @@ solr_maven_libs_list:
   - 'jcseg-elasticsearch'
   - 'jcseg-server'
 solr_maven_libs_dest: '{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib'
-
