@@ -44,13 +44,14 @@ provisioner:
     create: ../resources/provisioning/AWS/create.yml
     prepare: ../resources/prepare.yml
     destroy: ../resources/provisioning/AWS/destroy.yml
+    verify: ../resources/tests/verify_win.yml
   lint:
     name: ansible-lint
 scenario:
   name: cloud-aws-windows
 verifier:
-  name: testinfra
+  name: ansible
   options:
     verbose: true
   lint:
-    name: flake8
+    name: ansible-lint

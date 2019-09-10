@@ -1,0 +1,21 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Check if a service is installed
+      win_service:
+        name: solr
+      register: solr_service_info
+
+    - name: Check solr version
+      win_command: solr version
+      register: solr_ver
+      changed_when: false
+
+    - name: Debug solr version
+      debug:
+        var: solr_ver.stdout
+
+    - name: Assert that solr is running
+      assert:
+        that: "'running' in solr_service_info.state"
