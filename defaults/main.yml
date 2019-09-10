@@ -21,8 +21,8 @@ solr_patch_transport_s3_path: /folder
 download_path: '{{ default_download_path }}'
 
 solr_service_name: solr
-solr_with_systemd: True
-solr_service_start: True
+solr_with_systemd: true
+solr_service_start: true
 
 solr_user: solr
 solr_group: solr
@@ -32,8 +32,8 @@ solr_dest_main_path: '{{ default_solr_dest_main_path }}'
 solr_dest_path: '{{ default_solr_dest_path }}'
 
 # maven libs
-solr_maven_libs_configure: False
-solr_maven_libs_classifier_configure: False
+solr_maven_libs_configure: false
+solr_maven_libs_classifier_configure: false
 solr_maven_libs_version: 2.1.1
 solr_maven_group_id: 'org.lionsoul'
 solr_maven_repository_url: 'https://repo1.maven.org/maven2'

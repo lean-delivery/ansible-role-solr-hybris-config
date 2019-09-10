@@ -11,8 +11,8 @@
   win_copy:
     src: '{{ hybris_patch_file }}'
     dest: '{{ solr_dest_main_path }}/'
-    force: True
-    remote_src: True
+    force: true
+    remote_src: true
   loop:
     - '{{ solr_hybris_patch_contrib }}'
     - '{{ solr_hybris_patch_data }}'
@@ -24,39 +24,39 @@
     state: directory
     suffix: solr_hybris_data
   register: hybris_solr_data_temp_dir
-  changed_when: False
+  changed_when: false
 
 - name: Create contrib temporary directory
   win_tempfile:
     state: directory
     suffix: solr_hybris_contrib
   register: hybris_solr_contrib_temp_dir
-  changed_when: False
+  changed_when: false
 
 - name: Unzip data hybris components
   win_unzip:
     src: '{{ solr_hybris_patch_data }}'
     dest: '{{ hybris_solr_data_temp_dir.path }}'
-  changed_when: False
+  changed_when: false
 
 - name: Unzip contrib hybris components
   win_unzip:
     src: '{{ solr_hybris_patch_contrib }}'
     dest: '{{ hybris_solr_contrib_temp_dir.path }}'
-  changed_when: False
+  changed_when: false
 
 - name: Copy data components
   win_robocopy:
     src: '{{ hybris_solr_data_temp_dir.path }}'
     dest: '{{ solr_dest_path }}/server/solr/'
-    recurse: True
+    recurse: true
   notify: restart Solr Windows
 
 - name: Copy contrib components
   win_robocopy:
     src: '{{ hybris_solr_contrib_temp_dir.path }}'
     dest: '{{ solr_dest_path }}/'
-    recurse: True
+    recurse: true
   notify: restart Solr Windows
 
 - name: Install solr maven libraries
