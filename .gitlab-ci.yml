@@ -37,7 +37,7 @@ AWS solr-hybris-config:
     AWS_REGION: us-east-1
   stage: deployment test
   script:
-    - molecule --debug test -s cloud-aws-direct
+    - molecule test -s cloud-aws-direct
   tags:
     - aws
 
@@ -46,7 +46,7 @@ AWS Windows solr-hybris-config:
     AWS_REGION: us-east-1
   stage: deployment test
   script:
-    - molecule --debug test -s cloud-aws-windows
+    - molecule test -s cloud-aws-windows
   tags:
     - aws
 

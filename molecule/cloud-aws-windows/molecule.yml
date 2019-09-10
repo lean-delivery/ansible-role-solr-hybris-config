@@ -12,10 +12,11 @@ lint:
 platforms:
 
   - name: test-aws-Windows2016-solr-hybris-config
-    aws_image_id: ami-00a20f508263efd30
-    aws_region: us-east-1
+    image: ami-00a20f508263efd30
+    platform: windows2016core
+    region: us-east-1
     instance_type: m5.large
-    vpc_subnet_id: subnet-01be2149
+    vpc_subnet_id: subnet-314c223d
     assign_public_ip: True
     spot_price: 0.14
     aws_sec_group:
@@ -42,8 +43,6 @@ provisioner:
     destroy: ../resources/provisioning/WINRM/destroy.yml
   lint:
     name: ansible-lint
-  env:
-    ANSIBLE_LIBRARY: ${ANSIBLE_LIBRARY}
 scenario:
   name: cloud-aws-windows
 verifier:
