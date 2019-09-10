@@ -8,7 +8,7 @@
       register: solr_service_info
 
     - name: Check solr version
-      win_command: solr version
+      win_shell: solr version
       register: solr_ver
       changed_when: false
 
