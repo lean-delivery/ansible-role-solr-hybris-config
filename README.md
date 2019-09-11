@@ -233,23 +233,23 @@ Example Playbook with Maven enabled
   
 ```yml  
 - name: Configure Solr for SAP Hybris with additional solr libraries form Maven 
-hosts: solr  
-roles:  
-- role: lean_delivery.java  
-- role: lean_delivery.solr_standalone  
-- role: lean_delivery.solr_hybris_config
-  solr_maven_libs_configure:  true  
-  solr_maven_libs_classifier_configure:  true  
-  solr_maven_libs_version: 2.1.1  
-  solr_maven_group_id: 'org.lionsoul'  
-  solr_maven_repository_url: 'https://repo1.maven.org/maven2'  
-  solr_maven_classifier: 'javadoc'  
-  solr_maven_libs_list:  
-    - 'jcseg-analyzer'  
-    - 'jcseg-core'  
-    - 'jcseg-elasticsearch'  
-    - 'jcseg-server'  
-  solr_maven_libs_dest: '{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib'  
+  hosts: solr  
+  roles:  
+    - role: lean_delivery.java  
+    - role: lean_delivery.solr_standalone  
+    - role: lean_delivery.solr_hybris_config
+      solr_maven_libs_configure:  true  
+      solr_maven_libs_classifier_configure:  true  
+      solr_maven_libs_version: 2.1.1  
+      solr_maven_group_id: 'org.lionsoul'  
+      solr_maven_repository_url: 'https://repo1.maven.org/maven2'  
+      solr_maven_classifier: 'javadoc'  
+      solr_maven_libs_list:  
+        - 'jcseg-analyzer'  
+        - 'jcseg-core'  
+        - 'jcseg-elasticsearch'  
+        - 'jcseg-server'  
+      solr_maven_libs_dest: '{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib'  
 ```
 
 License
