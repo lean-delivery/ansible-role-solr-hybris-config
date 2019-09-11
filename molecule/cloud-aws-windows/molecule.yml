@@ -4,7 +4,7 @@ dependency:
   options:
     role-file: requirements.yml
 driver:
-  name: delegated
+  name: ec2
 lint:
   name: yamllint
   options:
@@ -12,43 +12,46 @@ lint:
 platforms:
 
   - name: test-aws-Windows2016-solr-hybris-config
-    aws_image_id: ami-00a20f508263efd30
-    aws_region: us-east-1
+    image: ami-00a20f508263efd30
+    platform: windows2016core
+    region: us-east-1
     instance_type: m5.large
-    vpc_subnet_id: subnet-01be2149
+    vpc_subnet_id: subnet-314c223d
     assign_public_ip: True
     spot_price: 0.14
-    aws_sec_group:
+    security_group_name:
       - default
     wait_timeout: 1800
     groups:
       - windows
+
 provisioner:
   name: ansible
-  log: False
-  connection_options:
-    ansible_connection: winrm
+  log: true
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks,timer
   inventory:
     group_vars:
       all:
         solr_version: 7.5.0
       windows:
-        ansible_password: "{{ lookup('env', 'WINRM_ADMIN_PWD') | default('M0leCule123!', True) }}"
+        ansible_connection: winrm
+        ansible_password: "{{ lookup('env', 'WINRM_ADMIN_PWD') | default('M0leCule123!', true) }}"
         ansible_winrm_transport: credssp
         ansible_winrm_server_cert_validation: ignore
   playbooks:
-    create: ../resources/provisioning/WINRM/create.yml
+    create: ../resources/provisioning/AWS/create.yml
     prepare: ../resources/prepare.yml
-    destroy: ../resources/provisioning/WINRM/destroy.yml
+    destroy: ../resources/provisioning/AWS/destroy.yml
+    verify: ../resources/tests/verify_win.yml
   lint:
     name: ansible-lint
-  env:
-    ANSIBLE_LIBRARY: ${ANSIBLE_LIBRARY}
 scenario:
   name: cloud-aws-windows
 verifier:
-  name: testinfra
+  name: ansible
   options:
     verbose: true
   lint:
-    name: flake8
+    name: ansible-lint

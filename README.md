@@ -122,11 +122,57 @@ Requirements
 
   - `solr_with_systemd` - to run solr as a service
 
-    default: `True`
+    default: `true`
 
   - `solr_service_start` - to start solr service in the end of role/Playbook
 
-    default: `True`
+    default: `true`
+
+## Maven Role Variables  
+  -  `solr_maven_libs_configure` - install additional solr libraries from a Maven repository 
+     
+     default: `false`
+  
+  -  `solr_maven_libs_classifier_configure` - install additional solr libraries with classifier from a Maven repository  
+  
+     default: `false`  
+  
+  -  `solr_maven_libs_version` - the version of Maven artifact  
+  
+     default: `2.1.1`  
+  
+  -  `solr_maven_group_id` - the Maven group ID
+  
+     default: `org.lionsoul`  
+  
+  -  `solr_maven_repository_url` - the URL of the Maven Repository to download from  
+  
+     default: `https://repo1.maven.org/maven2`  
+  
+  -  `solr_maven_classifier` - the Maven classifier, see note about classifier below
+  
+     default: `javadoc` 
+    
+  -  `solr_maven_libs_list` - the list of Maven artifacts  
+  
+     default: 
+       ```
+        - jcseg-analyzer
+        - jcseg-core
+        - jcseg-elasticsearch 
+        - jcseg-server
+       ```  
+  
+  -  `solr_maven_libs_dest` - path on the local filesystem for downloaded Maven artifacts  
+  
+     default: `{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib`
+
+### Note about Classifier
+```
+The classifier distinguishes artifacts that were built from the same POM but differ in content.
+It is some optional and arbitrary string.
+If this sting is present, it will be appended to the artifact name just after the version number.
+```
 
 ## Patch Creation
 ----------------
@@ -180,6 +226,30 @@ Example Playbook
     - role: lean_delivery.java
     - role: lean_delivery.solr_standalone
     - role: lean_delivery.solr_hybris_config
+```
+
+Example Playbook with Maven enabled
+-----------------------------------  
+  
+```yml  
+- name: Configure Solr for SAP Hybris with additional solr libraries form Maven 
+  hosts: solr  
+  roles:  
+    - role: lean_delivery.java  
+    - role: lean_delivery.solr_standalone  
+    - role: lean_delivery.solr_hybris_config
+      solr_maven_libs_configure:  true  
+      solr_maven_libs_classifier_configure:  true  
+      solr_maven_libs_version: 2.1.1  
+      solr_maven_group_id: 'org.lionsoul'  
+      solr_maven_repository_url: 'https://repo1.maven.org/maven2'  
+      solr_maven_classifier: 'javadoc'  
+      solr_maven_libs_list:  
+        - 'jcseg-analyzer'  
+        - 'jcseg-core'  
+        - 'jcseg-elasticsearch'  
+        - 'jcseg-server'  
+      solr_maven_libs_dest: '{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib'  
 ```
 
 License

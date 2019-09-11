@@ -15,7 +15,7 @@
     group: '{{ solr_group }}'
     mode: 0755
     creates: '{{ patch_conf_file.patch_creates }}'
-    remote_src: True
+    remote_src: true
   loop:
     - patch_src: '{{ solr_hybris_patch_contrib }}'
       patch_dest: '{{ solr_dest_path }}'
@@ -25,15 +25,56 @@
       patch_creates: '{{ solr_home }}/configsets/default'
   loop_control:
     loop_var: patch_conf_file
-  become: True
+  become: true
   notify:
     - restart Solr Linux
+
+- name: Install solr maven libraries
+  maven_artifact:
+    group_id: '{{ solr_maven_group_id }}'
+    artifact_id: '{{ item }}'
+    version: '{{ solr_maven_libs_version }}'
+    owner: '{{ solr_user }}'
+    group: '{{ solr_group }}'
+    mode: 0644
+    repository_url: '{{ solr_maven_repository_url }}'
+    dest: '{{ solr_maven_libs_dest }}/{{ item }}-{{ solr_maven_libs_version }}.jar'
+  loop: '{{ solr_maven_libs_list }}'
+  register: maven_libs_downloaded
+  until: maven_libs_downloaded is succeeded
+  retries: 3
+  delay: 2
+  become: true
+  notify:
+    - restart Solr Linux
+  when: solr_maven_libs_configure
+
+- name: Install solr maven classifier libraries
+  maven_artifact:
+    group_id: '{{ solr_maven_group_id }}'
+    artifact_id: '{{ item }}'
+    version: '{{ solr_maven_libs_version }}'
+    owner: '{{ solr_user }}'
+    group: '{{ solr_group }}'
+    mode: 0644
+    classifier: '{{ solr_maven_classifier }}'
+    repository_url: '{{ solr_maven_repository_url }}'
+    dest: '{{ solr_maven_libs_dest }}/{{ item }}-{{ solr_maven_libs_version }}-{{ solr_maven_classifier }}.jar'
+  loop: '{{ solr_maven_libs_list }}'
+  register: maven_libs_classifier_downloaded
+  until: maven_libs_classifier_downloaded is succeeded
+  retries: 3
+  delay: 2
+  become: true
+  notify:
+    - restart Solr Linux
+  when: solr_maven_libs_classifier_configure
 
 - name: Start service
   service:
     name: '{{ solr_service_name }}'
     state: started
-    enabled: True
-  become: True
+    enabled: true
+  become: true
   when:
     - solr_service_start

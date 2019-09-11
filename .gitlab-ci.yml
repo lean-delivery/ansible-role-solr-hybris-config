@@ -1,5 +1,8 @@
 ---
 # Run all tests
+default:
+  image: leandelivery/docker-ansible-ci:ansible-2.7
+
 stages:
   - lint
   - deployment test
@@ -50,7 +53,7 @@ AWS Windows solr-hybris-config:
   tags:
     - aws
 
-EPC solr-hybris-config:
+.EPC solr-hybris-config:
   variables:
     EPC_REGION: EPAM-BY2
   stage: deployment test
