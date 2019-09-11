@@ -129,43 +129,43 @@ Requirements
     default: `True`
 
 ## Maven Role Variables  
-  -  `solr_maven_libs_configure` - install additional solr libraries from a Maven repository  
-  
-    default: `False`  
+  -  `solr_maven_libs_configure` - install additional solr libraries from a Maven repository 
+     
+     default: `False`
   
   -  `solr_maven_libs_classifier_configure` - install additional solr libraries with classifier from a Maven repository  
   
-    default: `False`  
+     default: `False`  
   
   -  `solr_maven_libs_version` - the version of Maven artifact  
   
-    default: `2.1.1`  
+     default: `2.1.1`  
   
-  -  `solr_maven_group_id:` - the Maven group ID
+  -  `solr_maven_group_id` - the Maven group ID
   
-    default: `org.lionsoul`  
+     default: `org.lionsoul`  
   
   -  `solr_maven_repository_url` - the URL of the Maven Repository to download from  
   
-    default: `https://repo1.maven.org/maven2`  
+     default: `https://repo1.maven.org/maven2`  
   
   -  `solr_maven_classifier` - the Maven classifier, see note about classifier below
   
-    default: `javadoc` 
+     default: `javadoc` 
     
   -  `solr_maven_libs_list` - the list of Maven artifacts  
   
-    default: 
-    ```
-      - jcseg-analyzer
-      - jcseg-core
-      - jcseg-elasticsearch 
-      - jcseg-server
-    ```  
+     default: 
+       ```
+        - jcseg-analyzer
+        - jcseg-core
+        - jcseg-elasticsearch 
+        - jcseg-server
+       ```  
   
   -  `solr_maven_libs_dest` - path on the local filesystem for downloaded Maven artifacts  
   
-    default: `{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib`
+     default: `{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib`
 
 ### Note about Classifier
 ```
