@@ -122,20 +122,20 @@ Requirements
 
   - `solr_with_systemd` - to run solr as a service
 
-    default: `True`
+    default: `true`
 
   - `solr_service_start` - to start solr service in the end of role/Playbook
 
-    default: `True`
+    default: `true`
 
 ## Maven Role Variables  
   -  `solr_maven_libs_configure` - install additional solr libraries from a Maven repository 
      
-     default: `False`
+     default: `false`
   
   -  `solr_maven_libs_classifier_configure` - install additional solr libraries with classifier from a Maven repository  
   
-     default: `False`  
+     default: `false`  
   
   -  `solr_maven_libs_version` - the version of Maven artifact  
   
