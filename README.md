@@ -149,7 +149,7 @@ Requirements
   
     default: `https://repo1.maven.org/maven2`  
   
-  -  `solr_maven_classifier` - the Maven classifier (see note about classifier below)  
+  -  `solr_maven_classifier` - the Maven classifier, see note about classifier below
   
     default: `javadoc` 
     
@@ -168,10 +168,10 @@ Requirements
     default: `{{ solr_dest_path }}/server/solr-webapp/webapp/WEB-INF/lib`
 
 ### Note about Classifier
-----------------
 ```
 The classifier distinguishes artifacts that were built from the same POM but differ in content.
-It is some optional and arbitrary string that - if present - is appended to the artifact name just after the version number.
+It is some optional and arbitrary string.
+If this sting is present, it will be appended to the artifact name just after the version number.
 ```
 
 ## Patch Creation
@@ -229,7 +229,7 @@ Example Playbook
 ```
 
 Example Playbook with Maven enabled
-----------------  
+-----------------------------------  
   
 ```yml  
 - name: Configure Solr for SAP Hybris with additional solr libraries form Maven 
